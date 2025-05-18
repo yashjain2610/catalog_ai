@@ -14,4 +14,4 @@ with col1:
 
 with col2:
     if st.button("🔸 Open ai image gen"):
-        st.switch_page("pages/app.py")
+        st.switch_page("pages/app2.py")

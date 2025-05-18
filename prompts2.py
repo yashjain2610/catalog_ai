@@ -17,6 +17,7 @@ Overall Atmosphere: clean, crisp, minimalistic, luxury e-commerce presentation.
 Strictly avoid: blurry textures, cartoon-like rendering, unrealistic reflections, overexposure, or added graphic elements.
 
 Output: generate only the final polished image, without any additional text, captions, or descriptions.
+negative prompt - dont change the design of the bracelet each detail should remain same
 """
 
 multicolor_1_prompt = """
@@ -36,6 +37,7 @@ Atmosphere: luxurious, gentle, Instagram-worthy, sophisticated.
 Avoid: distracting backgrounds, harsh lighting, unrealistic colors.
 
 Generate only the final image, no additional text or explanation.
+negative prompt - dont change the design of the bracelet each detail should remain same
 """
 
 multicolor_2_prompt = """
@@ -57,6 +59,7 @@ Atmosphere: premium, editorial, artistic, moody luxury.
 Avoid: cluttered backgrounds, low resolution, distortion.
 
 Generate only the final image, no additional text or explanation.
+negative prompt - dont change the design of the bracelet each detail should remain same
 """
 
 props_img_prompt = """
@@ -78,6 +81,7 @@ Atmosphere: luxurious, Instagram-worthy, sophisticated, aesthetic.
 Avoid: overpowering props, busy composition, loss of jewelry focus.
 
 Generate only the final image, no additional text or explanation.
+negative prompt - dont change the design of the bracelet each detail should remain same
 """
 
 
@@ -99,6 +103,7 @@ Atmosphere: warm, organic, luxurious, and natural feel.
 Strictly avoid: unrealistic or stiff hand poses, over-edited skin, harsh or artificial lighting, excessive retouching.
 
 Output: generate only the final polished image without any additional text, annotations, or explanations.
+negative prompt - dont change the design of the bracelet each detail should remain same
 """
 
 
@@ -118,6 +123,7 @@ Overall Atmosphere: clean, crisp, minimalistic, luxury e-commerce presentation.
 Strictly avoid: blurry textures, cartoon-like rendering, unrealistic reflections, overexposure, or added graphic elements.
 
 Output: generate only the final polished image, without any additional text, captions, or descriptions.
+negative prompt - dont change the design of the bracelet each detail should remain same
 """
 
 multicolor_1_bracelet_prompt = """
@@ -139,6 +145,7 @@ Atmosphere: luxurious, gentle, Instagram-worthy, sophisticated.
 Avoid: distracting backgrounds, harsh lighting, unrealistic colors.
 
 Generate only the final polished image, with no additional text or explanation.
+negative prompt - dont change the design of the bracelet each detail should remain same
 """
 
 
@@ -161,6 +168,7 @@ Atmosphere: premium, editorial, artistic, moody luxury.
 Avoid: cluttered backgrounds, low resolution, distortion.
 
 Generate only the final polished image, with no additional text or explanation.
+negative prompt - dont change the design of the bracelet each detail should remain same
 """
 
 
@@ -183,6 +191,7 @@ Atmosphere: luxurious, Instagram-worthy, sophisticated, aesthetic.
 Avoid: overpowering props, busy composition, loss of jewelry focus.
 
 Generate only the final polished image, with no additional text or explanation
+negative prompt - dont change the design of the bracelet each detail should remain same
 
 """
 
@@ -206,6 +215,7 @@ Atmosphere: warm, organic, luxurious, and natural feel.
 Strictly avoid: unrealistic or stiff poses, over-edited skin, harsh or artificial lighting, excessive retouching.
 
 Output: generate only the final polished image without any additional text, annotations, or explanations.
+negative prompt - dont change the design of the bracelet each detail should remain same
 """
 
 
@@ -229,6 +239,7 @@ Overall Atmosphere: clean, crisp, minimalistic, luxury e-commerce presentation.
 Strictly avoid: blurry textures, cartoon-like rendering, unrealistic reflections, overexposure, or added graphic elements.
 
 Output: generate only the final polished image, without any additional text, captions, or descriptions.
+negative prompt - dont change the design of the bracelet each detail should remain same
 """
 
 
@@ -251,6 +262,7 @@ Atmosphere: luxurious, gentle, Instagram-worthy, sophisticated.
 Avoid: distracting backgrounds, harsh lighting, unrealistic colors.
 
 Generate only the final polished image, with no additional text or explanation.
+negative prompt - dont change the design of the bracelet each detail should remain same
 """
 
 
@@ -273,6 +285,7 @@ Atmosphere: premium, editorial, artistic, moody luxury.
 Avoid: cluttered backgrounds, low resolution, distortion.
 
 Generate only the final polished image, with no additional text or explanation.
+negative prompt - dont change the design of the bracelet each detail should remain same
 """
 
 
@@ -295,6 +308,7 @@ Atmosphere: luxurious, Instagram-worthy, sophisticated, aesthetic.
 Avoid: overpowering props, busy composition, loss of jewelry focus.
 
 Generate only the final polished image, with no additional text or explanation.
+negative prompt - dont change the design of the bracelet each detail should remain same
 """
 
 hand_necklace_prompt = """
@@ -316,6 +330,7 @@ Atmosphere: warm, organic, luxurious, and natural feel.
 Strictly avoid: unrealistic or stiff poses, over-edited skin or fabric, harsh or artificial lighting, excessive retouching.
 
 Output: generate only the final polished image without any additional text, annotations, or explanations.
+negative prompt - dont change the design of the bracelet each detail should remain same
 """
 
 neck_necklace_prompt = """
@@ -337,4 +352,5 @@ Atmosphere: warm, organic, luxurious, and natural feel.
 Strictly avoid: unrealistic or stiff poses, over-edited skin or fabric, harsh or artificial lighting, excessive retouching.
 
 Output: generate only the final polished image without any additional text, annotations, or explanations.
+negative prompt - dont change the design of the bracelet each detail should remain same
 """
