@@ -78,7 +78,7 @@ def get_gemini_responses(input_text, image, prompts):
         #     content = [prompt] + [base_model_image] + [image]
 
         response = client.models.generate_content(
-            model="gemini-2.0-flash-exp-image-generation",
+            model="gemini-2.0-flash-preview-image-generation",
             contents=content,
             config=types.GenerateContentConfig(
             response_modalities=['TEXT', 'IMAGE']
