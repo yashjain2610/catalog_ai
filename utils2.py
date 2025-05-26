@@ -46,12 +46,21 @@ def get_all_model_images(folder_path="model images"):
     return images
 
 
-def resize_img(image):
+def resize_img2(image):
 # Make image square by padding (optional: crop instead)
     img_square = ImageOps.pad(image, (max(image.size), max(image.size)), color=(255, 255, 255))
 
 # Resize to 2000x2000
     img_resized = img_square.resize((1080, 1440), Image.Resampling.LANCZOS)
+
+# Save the result
+    return img_resized
+
+def resize_img(image):
+    img_square = ImageOps.pad(image, (max(image.size), max(image.size)), color=(255, 255, 255))
+
+# Resize to 2000x2000
+    img_resized = img_square.resize((2000, 2000), Image.Resampling.LANCZOS)
 
 # Save the result
     return img_resized

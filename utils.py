@@ -27,7 +27,7 @@ def get_gemini_responses(input, image, prompts):
         for part in response.parts:
             if part.text:
                 all_responses.append(part.text)
-    print(all_responses)
+    #print(all_responses)
     return all_responses
 
 def get_gemini_dims_responses(input, image, prompts):
@@ -48,6 +48,14 @@ def get_gemini_dims_responses(input, image, prompts):
     # print(all_responses)
     return all_responses[0]
 
+# def input_image_setup(uploaded_file):
+#     if uploaded_file is not None:
+#         bytes_data = uploaded_file.getvalue()
+#         image_parts = [{"mime_type": uploaded_file.type, "data": bytes_data}]
+#         return image_parts
+#     else:
+#         raise FileNotFoundError("No file uploaded")
+    
 def input_image_setup(uploaded_file):
     if uploaded_file is not None:
         bytes_data = uploaded_file.getvalue()

@@ -31,6 +31,8 @@ PROMPT_LIST = [
 ]
 uploaded_images = st.file_uploader("Upload an image", type=["png", "jpg", "jpeg", "webp"],accept_multiple_files=True , key="up1")
 
+
+
 for uploaded_image in uploaded_images:
         image = Image.open(uploaded_image)
         filename = uploaded_image.name
@@ -39,11 +41,9 @@ for uploaded_image in uploaded_images:
         st.image(image, caption=filename, use_container_width=300)
 
 
+use_resize2 = st.checkbox("Use 1080 X 1440 resize", value=False)
 
 generate = st.button("generate for earrings")
-
-
-
 
 
 if "responses" not in st.session_state:
@@ -81,7 +81,7 @@ if uploaded_images is not None:
                     img_bytes = item["images"][0]
 
                     gen_image = Image.open(io.BytesIO(img_bytes))
-                    gen_image = resize_img(gen_image)
+                    gen_image = resize_img2(gen_image) if use_resize2 else resize_img(gen_image)
 
                     img_buffer = io.BytesIO()
                     gen_image.save(img_buffer, format="PNG")
@@ -154,7 +154,7 @@ if uploaded_images is not None:
                 try:
                     img_bytes = item["images"][0]
                     gen_image = Image.open(io.BytesIO(img_bytes))
-                    gen_image = resize_img(gen_image)
+                    gen_image = resize_img2(gen_image) if use_resize2 else resize_img(gen_image)
 
                     img_buffer = io.BytesIO()
                     gen_image.save(img_buffer, format="PNG")
@@ -223,7 +223,7 @@ if uploaded_images is not None:
                 try:
                     img_bytes = item["images"][0]
                     gen_image = Image.open(io.BytesIO(img_bytes))
-                    gen_image = resize_img(gen_image)
+                    gen_image = resize_img2(gen_image) if use_resize2 else resize_img(gen_image)
 
                     img_buffer = io.BytesIO()
                     gen_image.save(img_buffer, format="PNG")
