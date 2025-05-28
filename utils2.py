@@ -8,14 +8,69 @@ from PIL import Image , ImageOps
 from io import BytesIO
 from google import genai
 from google.genai import types
+from google.api_core import exceptions as google_exceptions
+import itertools
+import grpc
 
 from dotenv import load_dotenv
 
 load_dotenv()
 
 
-client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY"))
+API_KEYS = [
+    os.getenv("GOOGLE_API_KEY"),
+    os.getenv("GOOGLE_API_KEY2"),
+    os.getenv("GOOGLE_API_KEY3"),
+    os.getenv("GOOGLE_API_KEY4"),
+]
 
+#print(API_KEYS)
+clients = [genai.Client(api_key=key) for key in API_KEYS]
+client_cycle = itertools.cycle(clients)
+
+
+
+def _is_quota_exceeded(err) -> bool:
+    # HTTP‐style 429
+    if getattr(err, 'code', None) == 429:
+        return True
+
+    # grpc.RpcError
+    if isinstance(err, grpc.RpcError) and err.code() == grpc.StatusCode.RESOURCE_EXHAUSTED:
+        return True
+
+    # Google API exception
+    if isinstance(err, google_exceptions.ResourceExhausted):
+        return True
+
+    # Fallback: look for the string in the message
+    msg = str(err).upper()
+    if 'RESOURCE_EXHAUSTED' in msg or 'QUOTA' in msg:
+        return True
+
+    return False
+
+def generate_with_failover(model: str, contents: list, config: types.GenerateContentConfig):
+    last_exc = None
+
+    for _ in range(len(clients)):
+        client = next(client_cycle)
+        try:
+            return client.models.generate_content(
+                model=model,
+                contents=contents,
+                config=config
+            )
+        except Exception as e:
+            if _is_quota_exceeded(e):
+                last_exc = e
+                # optionally log which key failed here
+                continue
+            # if it wasn’t a quota problem, bail out
+            raise
+
+    # all keys hit quota
+    raise last_exc
 
 def get_random_model_image(folder_path="model images"):
     # List only image files with valid extensions
@@ -77,13 +132,17 @@ def get_gemini_responses(input_text, image, prompts):
         #     #model_image = get_all_model_images("sample output model")
         #     content = [prompt] + [base_model_image] + [image]
 
-        response = client.models.generate_content(
-            model="gemini-2.0-flash-preview-image-generation",
-            contents=content,
-            config=types.GenerateContentConfig(
-            response_modalities=['TEXT', 'IMAGE']
+        try:
+            response = generate_with_failover(
+                model="gemini-2.0-flash-preview-image-generation",
+                contents=content,
+                config=types.GenerateContentConfig(
+                    response_modalities=['TEXT', 'IMAGE']
+                )
             )
-        )
+        except Exception as e:
+            st.error(f"All API-keys exhausted or fatal error: {e}")
+            break
 
         structured_response = {
             "prompt": prompt,
