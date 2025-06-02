@@ -13,7 +13,7 @@ FORM_ID = "1091525909677464"
 # Fetch lead data from Meta
 PAGE_ACCESS_TOKEN = os.getenv("PAGE_ACCESS_TOKEN")
 def fetch_leads():
-    url = f"https://graph.facebook.com/v22.0/{FORM_ID}/leads"
+    url = f"https://graph.facebook.com/v22.0/{FORM_ID}/leads?limit=500"
     params = {
         "access_token": PAGE_ACCESS_TOKEN,
         "fields": "created_time,field_data"
