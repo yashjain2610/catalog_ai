@@ -15,7 +15,7 @@ from dotenv import load_dotenv
 from PIL import Image
 from openpyxl import Workbook
 
-from utils import get_gemini_responses, input_image_setup, input_image_setup_local, encode_image , get_gemini_dims_responses
+from utils import get_gemini_responses, input_image_setup, input_image_setup_local, encode_image , get_gemini_dims_responses , get_gemini_responses_multi_image
 from prompts import * 
 from excel_fields import *
 
@@ -173,7 +173,7 @@ def write_to_excel_amz_xl(results,filename,target_fields,fixed_values):
 
         # Read headers dynamically from row 1
         headers = {cell.value: cell.column for cell in ws[3] if cell.value}
-        print(headers)
+        #print(headers)
         print()
     else:
         wb = Workbook()
@@ -491,7 +491,12 @@ def main():
         with tempfile.NamedTemporaryFile(delete=False, suffix=".xlsx") as tmp:
             tmp.write(excel_file_mee_brc.read())
             temp_filename_mee_brc = tmp.name
-
+    excel_file_amz_bra = st.file_uploader("📤 Upload your Excel file of amazon for bracelet", type=["xlsx"] , key="up10")
+    temp_filename_amz_bra = None
+    if excel_file_amz_bra:
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".xlsx") as tmp:
+            tmp.write(excel_file_amz_bra.read())
+            temp_filename_amz_bra = tmp.name
     
         
     
@@ -795,6 +800,27 @@ def main():
                     target_fields_bracelet_meesho,
                     fixed_values_bracelet_meesho
                 )
+### bracelet amazon
+
+    input_prompt_bracelet_amazon = [prompt_description_bracelet_amz,prompt_questions_bracelet_amz,prompt_dimensions_bracelet_amz]
+
+    submit_uploaded_bracelet_amazon = st.button("process uploaded images for bracelet (amazon format)")
+
+    if submit_uploaded_bracelet_amazon:
+        results_bracelet = on_click_uploaded(uploaded_files,input_prompt_bracelet_amazon,"amz")
+        st.session_state["results_ready_amz_bra"] = results_bracelet
+        st.success("✅ Results generated.")
+    if "results_ready_amz_bra" in st.session_state:
+        if excel_file_amz_bra:
+            st.info("Now click below to save the results to your uploaded Excel.")
+            if st.button("💾 Save Results to Excel", key="bu5"):
+                # Save to Excel
+                write_to_excel_amz_xl(
+                    st.session_state["results_ready_amz_bra"],
+                    temp_filename_amz_bra,
+                    target_fields_bracelet_amz,
+                    fixed_values_bracelet_amz
+                )
 
 
     # if submit_local_bracelet_meesho:
@@ -802,6 +828,50 @@ def main():
     #     write_to_excel_meesho(results,filename="bracelet_meesho.xlsx",target_fields=target_fields_bracelet_meesho,fixed_values=fixed_values_bracelet_meesho)
     #     st.success(f"✅ Results have been saved to bracelet_Meesho.xlsx")
 
+    ### variations
+
+#     uploaded_files_variations = st.file_uploader(
+#     "Choose image files", 
+#     type=["png", "jpg", "jpeg", "webp"], 
+#     accept_multiple_files=True
+# )
+    
+#     variations_button = st.button("process uploaded images for variations")
+
+# # Display the uploaded images
+#     if variations_button:
+#         st.write(f"Uploaded {len(uploaded_files_variations)} image(s):")
+
+#         image_parts_list = []
+#         for file in uploaded_files:
+#             # Read image
+#             image = Image.open(file)
+            
+#             # Display thumbnail or full image
+#             st.image(image, caption=file.name, use_column_width=True)
+
+#             # Get image parts
+#             image_parts = input_image_setup(image)
+#             image_parts_list.append(image_parts)
+
+#         variations_prompts = [variations_prompt]
+#         variation_row = get_gemini_responses_multi_image("analyse all the images carefully",image_parts_list, variations_prompts)
+#         cleaned = re.sub(r"```(?:json)?\s*([\s\S]*?)\s*```", r"\1", variation_row[0].strip(), flags=re.IGNORECASE)
+#         variation_row_dict = json.loads(cleaned)
+#         #print(variation_row_dict)
+#         image_name = variation_row_dict["item_sku"]
+#         variation_row_dict.pop("item_sku")
+#         write_to_excel_amz_xl([(image_name,variation_row_dict,"")], temp_filename_amz_ear,target_values_variations_amz,fixed_values_variation_amz)
+#         results = on_click_uploaded(uploaded_files_variations,input_prompt_earrings_amazon,"amz", dimensions_prompt_list=dimensions_prompt_list_amz)
+#         fixed_values_variations_child["parent_sku"] = image_name
+#         fixed_values_earrings_amz.update(fixed_values_variations_child)
+#         st.session_state["results_ready_amz_ear"] = results
+#         write_to_excel_amz_xl(
+#                     st.session_state["results_ready_amz_ear"],
+#                     temp_filename_amz_ear,
+#                     target_fields_earrings_amz,
+#                     fixed_values_earrings_amz
+#                 )
 
 ### DOWNLOAD BUTTONS
     st.header("Download Excel")
@@ -872,7 +942,14 @@ def main():
             file_name="Updated_necklace_meesho.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
-
+    if excel_file_amz_bra:
+        with open(temp_filename_amz_bra, "rb") as f:
+            st.download_button(
+            label="📥 Download Updated Excel for bracelet (amazon)",
+            data=f,
+            file_name="Updated_bracelet_amazon.xlsx",
+            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        )
      
         
 
