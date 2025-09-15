@@ -35,7 +35,7 @@ uploaded_file = st.file_uploader(
 )
 
 if uploaded_file is not None:
-    st.image(uploaded_file, caption="Uploaded Image.", use_column_width=True)
+    st.image(uploaded_file, caption="Uploaded Image.", use_container_width=True)
 
 # --- Generate Button and Logic ---
 st.header("2. Generate Your Post")
@@ -109,7 +109,7 @@ if generate_button:
                                     st.image(
                                         img_bytes,
                                         caption=f"Generated Image {j+1}",
-                                        use_column_width=True
+                                        use_container_width=True
                                     )
 
                                 with col2:
