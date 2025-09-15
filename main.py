@@ -6,7 +6,7 @@ st.title("Welcome to the Jewelry Image Generator 💍")
 
 st.markdown("Choose an app to get started:")
 
-col1, col2 , col3 = st.columns(3)
+col1, col2 , col3 , col4 = st.columns(4)
 
 with col1:
     if st.button("🔹 Open catalog ai"):
@@ -18,3 +18,7 @@ with col2:
 with col3:
     if st.button("🔸 Open leads dashboard"):
         st.switch_page("pages/leads_gen.py")
+
+with col4:
+    if st.button("🔸 Open social media post gen"):
+        st.switch_page("pages/social_media.py")
