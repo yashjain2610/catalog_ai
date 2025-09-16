@@ -6,22 +6,6 @@ The output must be only the image.
 
 # Prompt for when only text is provided
 TEXT_PROMPT = """
-Content Idea: “Motivational Monday” Series
-
-Purpose: Boost engagement at the start of the week with short, relatable motivational content.
-
-Sample Caption:
-"New week. New energy. New goals. ✨
-Remember, even small steps count—keep moving forward!"
-
-Image Concept:
-
-Minimalist design with a sunrise background.
-
-A silhouette of a person climbing stairs or a mountain.
-
-Bold text overlay: “Small Steps, Big Changes”.
-
 Based on the description, generate a visually stunning, high-quality image perfect for a social media post.
 The style should be vibrant, engaging, and directly related to the text.
 The output must be only the image.
