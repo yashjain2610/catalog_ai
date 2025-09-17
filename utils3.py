@@ -135,11 +135,23 @@ def get_gemini_responses(input_text, image, prompts):
     return all_responses
 
 
-def resize_img(image):
+def resize_img(image,one,three,nine):
+    width = 0
+    height = 0
+    if one:
+        width = 1000
+        height = 1000
+    elif three:
+        width = 1080
+        height = 1350
+    elif nine:
+        width = 1080
+        height = 1920
+
     img_square = ImageOps.pad(image, (max(image.size), max(image.size)), color=(255, 255, 255))
 
 # Resize to 2000x2000
-    img_resized = img_square.resize((1080, 1920), Image.Resampling.LANCZOS)
+    img_resized = img_square.resize((width, height), Image.Resampling.LANCZOS)
 
 # Save the result
     return img_resized
