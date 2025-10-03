@@ -31,8 +31,8 @@ def handle_regenerate(index):
             
             # Use the stored style image if it exists
             style_image = st.session_state.style_image_bytes
-            if style_image:
-                 style_image = Image.open(io.BytesIO(style_image))
+            # if style_image:
+            #      style_image = Image.open(io.BytesIO(style_image))
 
             # Call the API for just one prompt
             new_content_list = get_gemini_responses("test", style_image, [prompt])
@@ -124,6 +124,7 @@ if generate_button:
                 # --- Prepare inputs for the model ---
                 if uploaded_file:
                     image_bytes = Image.open(uploaded_file)
+                    st.session_state.style_image_bytes = image_bytes
                 else:
                     image_bytes = None
                 prompt = ""
@@ -150,12 +151,13 @@ if generate_button:
                         )
                         prompts_list.append(prompt)
                 
-                st.session_state.prompts_list = prompts_list
 
                 # --- Call the Gemini API ---
                 if len(prompts_list) > 0:
+                    st.session_state.prompts_list = prompts_list
                     generated_content = get_gemini_responses("test",image_bytes,prompts_list)
                 else:
+                    st.session_state.prompts_list = [prompt]
                     generated_content = get_gemini_responses("text", image_bytes, [prompt])
                 
                 st.session_state.generated_content = generated_content

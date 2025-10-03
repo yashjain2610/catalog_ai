@@ -1,7 +1,19 @@
 IMAGE_PROMPT = """
-Analyze the provided image and generate a new, visually stunning, high-quality image inspired by it.
-The new image should capture the essence, style, and mood of the original but be a unique creation.
-The output must be only the image.
+Act as a luxury jewellery brand’s creative director and social media strategist. Based on the jewellery item image provided, generate a complete Instagram post that is both trendy and brand-consistent.
+
+you have to create an image with the given description and the item image which you include should match 100% to the item image i have provide to you.
+
+Image: A photorealistic, high-end Instagram-ready image or lifestyle render of the jewellery item. Feel free to follow or creatively adapt current visual trends — such as:
+
+Natural light + editorial shadows
+
+"Messy luxury" flat lays
+
+Moody minimalism or bold color-blocked backgrounds
+
+Viral aesthetic themes (e.g. coquette, quiet luxury, mob wife, etc.)
+
+Add props or backdrops to elevate story (e.g. silk fabric, perfume bottle, mirror reflection, etc.
 """
 
 # Prompt for when only text is provided
@@ -15,9 +27,21 @@ Description: "{user_text}"
 
 # Prompt for when both an image and text are provided
 IMAGE_AND_TEXT_PROMPT = """
-Create a new, visually stunning, high-quality image that combines the theme of the uploaded picture with the following description.
-The new image should be a cohesive blend of both inputs, creating a unique visual narrative.
-The output must be only the image.
+Act as a luxury jewellery brand’s creative director and social media strategist. Based on the jewellery item image provided, generate a complete Instagram post that is both trendy and brand-consistent.
+
+Create:
+
+Image: A photorealistic, high-end Instagram-ready image or lifestyle render of the jewellery item. Feel free to follow or creatively adapt current visual trends — such as:
+
+Natural light + editorial shadows
+
+"Messy luxury" flat lays
+
+Moody minimalism or bold color-blocked backgrounds
+
+Viral aesthetic themes (e.g. coquette, quiet luxury, mob wife, etc.)
+
+Add props or backdrops to elevate story (e.g. silk fabric, perfume bottle, mirror reflection, etc.
 
 Description: "{user_text}"
 """
