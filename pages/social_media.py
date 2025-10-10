@@ -103,7 +103,7 @@ use_resize3 = st.checkbox("Use 9:16", value=False)
 # Image Input
 uploaded_file = st.file_uploader(
     "Upload an image (optional):",
-    type=["jpg", "jpeg", "png"]
+    type=["jpg", "jpeg", "png","webp"]
 )
 
 if uploaded_file is not None:
