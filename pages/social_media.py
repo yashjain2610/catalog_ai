@@ -108,6 +108,11 @@ uploaded_file = st.file_uploader(
 
 if uploaded_file is not None:
     st.image(uploaded_file, caption="Uploaded Image.", use_container_width=True)
+    p1 = st.checkbox("Textured Minimal Elegance", value=False)
+    p2 = st.checkbox("Lifestyle Luxe Frame", value=False)
+    p3 = st.checkbox("Hero Spotlight", value=False)
+    p4 = st.checkbox("Festive Radiance", value=False)
+    p5 = st.checkbox("Brand Signature Visual", value=False)
 
 # --- Generate Button and Logic ---
 st.header("2. Generate Your Post")
@@ -139,6 +144,16 @@ if generate_button:
                     # Case 2: Only image is provided
                     st.info("Using the uploaded image for generation.")
                     prompt = IMAGE_PROMPT
+                    if p1:
+                        prompt = PROMPT1_IMG
+                    elif p2:
+                        prompt = PROMPT2_IMG
+                    elif p3:
+                        prompt = PROMPT3_IMG
+                    elif p4:
+                        prompt = PROMPT4_IMG
+                    elif p5:
+                        prompt = PROMPT5_IMG
 
                 elif user_text:
                     # Case 3: Only text is provided
